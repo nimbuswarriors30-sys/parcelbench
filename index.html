@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Volumetric Weight Calculator India | ParcelBench</title>
+  <meta name="description" content="Free volumetric and chargeable weight calculator for parcels and courier shipments in India. Compare actual and dimensional weight instantly.">
+  <link rel="canonical" href="https://parcelbench.in/">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header><div class="wrap nav"><a class="brand" href="/">ParcelBench</a><nav><a href="#calculator">Calculator</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav></div></header>
+<main>
+<section class="hero wrap">
+  <span class="eyebrow">FREE SHIPPING UTILITY</span>
+  <h1>Volumetric Weight Calculator</h1>
+  <p>Calculate dimensional weight and find the chargeable weight of your parcel before you ship.</p>
+</section>
+<section id="calculator" class="wrap">
+<div class="card calculator">
+  <div class="grid">
+    <label>Length (cm)<input id="length" type="number" min="0" step="0.01" placeholder="e.g. 40"></label>
+    <label>Width (cm)<input id="width" type="number" min="0" step="0.01" placeholder="e.g. 30"></label>
+    <label>Height (cm)<input id="height" type="number" min="0" step="0.01" placeholder="e.g. 20"></label>
+    <label>Actual weight (kg)<input id="actual" type="number" min="0" step="0.01" placeholder="e.g. 3.2"></label>
+  </div>
+  <label>Volumetric divisor
+    <select id="divisor">
+      <option value="5000">5000 — common air/express divisor</option>
+      <option value="6000">6000 — alternative courier divisor</option>
+      <option value="4000">4000 — custom/common carrier divisor</option>
+    </select>
+  </label>
+  <button id="calculate">Calculate weight</button>
+  <div id="result" class="result" aria-live="polite">
+    <div><span>Volumetric weight</span><strong id="vol">—</strong></div>
+    <div><span>Actual weight</span><strong id="act">—</strong></div>
+    <div class="charge"><span>Chargeable weight</span><strong id="charge">—</strong></div>
+  </div>
+  <p class="note">Carrier rules vary. Confirm the divisor, rounding method and final billed weight with your courier before shipping.</p>
+</div>
+</section>
+<section class="wrap content">
+<h2>What is volumetric weight?</h2>
+<p>A large but lightweight parcel can occupy more vehicle or aircraft space than its scale weight suggests. Couriers therefore often compare its actual weight with its volumetric (dimensional) weight and may charge using the higher value.</p>
+<div class="formula"><strong>Formula:</strong> Length × Width × Height ÷ Divisor</div>
+<h2>How to use ParcelBench</h2>
+<ol><li>Measure the packed parcel's length, width and height in centimetres.</li><li>Enter its actual weight in kilograms.</li><li>Select the divisor specified by your courier.</li><li>Calculate and compare actual versus volumetric weight.</li></ol>
+<h2>Example</h2>
+<p>A 40 × 30 × 20 cm parcel using a divisor of 5000 has a volumetric weight of 4.8 kg. If its actual weight is 3.2 kg, the calculator shows 4.8 kg as the chargeable-weight reference.</p>
+<h2>Why ParcelBench?</h2>
+<p>ParcelBench is being built as a simple collection of shipping and parcel utilities for Indian users, sellers and small businesses. No signup is required for this calculator.</p>
+</section>
+</main>
+<footer><div class="wrap"><span>© 2026 ParcelBench</span><span><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="contact.html">Contact</a></span></div></footer>
+<script src="app.js"></script>
+</body></html>
