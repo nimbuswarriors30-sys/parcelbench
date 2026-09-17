@@ -3,55 +3,332 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+
   <title>Volumetric Weight Calculator India | ParcelBench</title>
-  <meta name="description" content="Free volumetric and chargeable weight calculator for parcels and courier shipments in India. Compare actual and dimensional weight instantly.">
+
+  <meta name="description"
+    content="Free volumetric weight and chargeable weight calculator for parcels. Enter dimensions and actual weight to compare actual vs volumetric weight. Supports cm and inches.">
+
   <link rel="canonical" href="https://parcelbench.in/">
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-<header><div class="wrap nav"><a class="brand" href="/">ParcelBench</a><nav><a href="#calculator">Calculator</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav></div></header>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="/">ParcelBench</a>
+
+    <nav>
+      <a href="#calculator">Calculator</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
 <main>
-<section class="hero wrap">
-  <span class="eyebrow">FREE SHIPPING UTILITY</span>
-  <h1>Volumetric Weight Calculator</h1>
-  <p>Calculate dimensional weight and find the chargeable weight of your parcel before you ship.</p>
-</section>
-<section id="calculator" class="wrap">
-<div class="card calculator">
-  <div class="grid">
-    <label>Length (cm)<input id="length" type="number" min="0" step="0.01" placeholder="e.g. 40"></label>
-    <label>Width (cm)<input id="width" type="number" min="0" step="0.01" placeholder="e.g. 30"></label>
-    <label>Height (cm)<input id="height" type="number" min="0" step="0.01" placeholder="e.g. 20"></label>
-    <label>Actual weight (kg)<input id="actual" type="number" min="0" step="0.01" placeholder="e.g. 3.2"></label>
-  </div>
-  <label>Volumetric divisor
-    <select id="divisor">
-      <option value="5000">5000 — common air/express divisor</option>
-      <option value="6000">6000 — alternative courier divisor</option>
-      <option value="4000">4000 — custom/common carrier divisor</option>
-    </select>
-  </label>
-  <button id="calculate">Calculate weight</button>
-  <div id="result" class="result" aria-live="polite">
-    <div><span>Volumetric weight</span><strong id="vol">—</strong></div>
-    <div><span>Actual weight</span><strong id="act">—</strong></div>
-    <div class="charge"><span>Chargeable weight</span><strong id="charge">—</strong></div>
-  </div>
-  <p class="note">Carrier rules vary. Confirm the divisor, rounding method and final billed weight with your courier before shipping.</p>
-</div>
-</section>
-<section class="wrap content">
-<h2>What is volumetric weight?</h2>
-<p>A large but lightweight parcel can occupy more vehicle or aircraft space than its scale weight suggests. Couriers therefore often compare its actual weight with its volumetric (dimensional) weight and may charge using the higher value.</p>
-<div class="formula"><strong>Formula:</strong> Length × Width × Height ÷ Divisor</div>
-<h2>How to use ParcelBench</h2>
-<ol><li>Measure the packed parcel's length, width and height in centimetres.</li><li>Enter its actual weight in kilograms.</li><li>Select the divisor specified by your courier.</li><li>Calculate and compare actual versus volumetric weight.</li></ol>
-<h2>Example</h2>
-<p>A 40 × 30 × 20 cm parcel using a divisor of 5000 has a volumetric weight of 4.8 kg. If its actual weight is 3.2 kg, the calculator shows 4.8 kg as the chargeable-weight reference.</p>
-<h2>Why ParcelBench?</h2>
-<p>ParcelBench is being built as a simple collection of shipping and parcel utilities for Indian users, sellers and small businesses. No signup is required for this calculator.</p>
-</section>
+
+  <section class="hero wrap">
+    <span class="eyebrow">FREE SHIPPING UTILITY</span>
+
+    <h1>Volumetric Weight Calculator</h1>
+
+    <p>
+      Calculate your parcel's volumetric weight, compare it with
+      actual weight and understand which weight may be chargeable.
+    </p>
+  </section>
+
+
+  <section id="calculator" class="wrap">
+
+    <div class="card calculator">
+
+      <h2>Enter Parcel Details</h2>
+
+      <label>
+        Measurement unit
+        <select id="unit">
+          <option value="cm">Centimetres (cm)</option>
+          <option value="in">Inches (in)</option>
+        </select>
+      </label>
+
+      <div class="grid">
+
+        <label>
+          Length
+          <input id="length" type="number" min="0" step="0.01"
+            placeholder="e.g. 40">
+        </label>
+
+        <label>
+          Width
+          <input id="width" type="number" min="0" step="0.01"
+            placeholder="e.g. 30">
+        </label>
+
+        <label>
+          Height
+          <input id="height" type="number" min="0" step="0.01"
+            placeholder="e.g. 20">
+        </label>
+
+        <label>
+          Actual weight (kg)
+          <input id="actual" type="number" min="0" step="0.01"
+            placeholder="e.g. 3">
+        </label>
+
+      </div>
+
+
+      <label>
+        Volumetric divisor
+
+        <select id="divisor">
+          <option value="5000">5000 — common air/express divisor</option>
+          <option value="6000">6000 — alternative divisor</option>
+          <option value="custom">Custom divisor</option>
+        </select>
+      </label>
+
+
+      <div id="customDivisorBox" style="display:none;">
+        <label>
+          Custom divisor
+          <input id="customDivisor" type="number" min="1"
+            placeholder="Enter divisor">
+        </label>
+      </div>
+
+
+      <button id="calculateBtn" type="button">
+        Calculate Weight
+      </button>
+
+
+      <div id="result" style="display:none; margin-top:24px;">
+
+        <h2>Your Parcel Result</h2>
+
+        <p>
+          Actual weight:
+          <strong id="actualResult"></strong>
+        </p>
+
+        <p>
+          Volumetric weight:
+          <strong id="volumetricResult"></strong>
+        </p>
+
+        <p>
+          Chargeable weight:
+          <strong id="chargeableResult"></strong>
+        </p>
+
+        <div class="note">
+          <strong>Why?</strong>
+          <span id="reasonResult"></span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <section class="wrap">
+
+    <div class="card">
+
+      <h2>What is volumetric weight?</h2>
+
+      <p>
+        Volumetric weight, also called dimensional weight, represents
+        the amount of space a parcel occupies compared with its
+        physical weight.
+      </p>
+
+      <p>
+        A large lightweight box can therefore have a higher
+        volumetric weight than its actual weight.
+      </p>
+
+
+      <h2>Volumetric weight formula</h2>
+
+      <p>
+        When dimensions are measured in centimetres:
+      </p>
+
+      <p>
+        <strong>
+          Length × Width × Height ÷ Volumetric Divisor
+        </strong>
+      </p>
+
+      <p>
+        Example: a parcel measuring 40 × 30 × 20 cm using a divisor
+        of 5000 has a volumetric weight of:
+      </p>
+
+      <p>
+        <strong>40 × 30 × 20 ÷ 5000 = 4.8 kg</strong>
+      </p>
+
+
+      <h2>Actual weight vs volumetric weight</h2>
+
+      <p>
+        Actual weight is the weight measured on a weighing scale.
+        Volumetric weight is calculated from the parcel's dimensions.
+      </p>
+
+      <p>
+        Shipping providers may use the higher of actual weight and
+        volumetric weight when determining chargeable weight,
+        depending on their service and rate rules.
+      </p>
+
+
+      <h2>Using inches</h2>
+
+      <p>
+        ParcelBench can also accept dimensions in inches. The
+        calculator converts the dimensions before applying the
+        selected centimetre-based volumetric divisor.
+      </p>
+
+
+      <h2>Important</h2>
+
+      <p>
+        Volumetric-weight rules and divisors can differ between
+        courier companies, transport modes and services. Check the
+        applicable courier's current rules before relying on the
+        result for billing.
+      </p>
+
+    </div>
+
+  </section>
+
 </main>
-<footer><div class="wrap"><span>© 2026 ParcelBench</span><span><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="contact.html">Contact</a></span></div></footer>
-<script src="app.js"></script>
-</body></html>
+
+
+<footer class="wrap">
+  <p>
+    © ParcelBench ·
+    <a href="privacy.html">Privacy</a> ·
+    <a href="terms.html">Terms</a> ·
+    <a href="contact.html">Contact</a>
+  </p>
+</footer>
+
+
+<script>
+const unit = document.getElementById("unit");
+const divisorSelect = document.getElementById("divisor");
+const customBox = document.getElementById("customDivisorBox");
+
+divisorSelect.addEventListener("change", function () {
+  customBox.style.display =
+    divisorSelect.value === "custom" ? "block" : "none";
+});
+
+
+document.getElementById("calculateBtn").addEventListener("click", function () {
+
+  let length = parseFloat(document.getElementById("length").value);
+  let width = parseFloat(document.getElementById("width").value);
+  let height = parseFloat(document.getElementById("height").value);
+  let actual = parseFloat(document.getElementById("actual").value);
+
+  if (
+    !Number.isFinite(length) ||
+    !Number.isFinite(width) ||
+    !Number.isFinite(height) ||
+    !Number.isFinite(actual) ||
+    length <= 0 ||
+    width <= 0 ||
+    height <= 0 ||
+    actual <= 0
+  ) {
+    alert("Please enter valid parcel dimensions and actual weight.");
+    return;
+  }
+
+
+  if (unit.value === "in") {
+    length *= 2.54;
+    width *= 2.54;
+    height *= 2.54;
+  }
+
+
+  let divisor;
+
+  if (divisorSelect.value === "custom") {
+    divisor = parseFloat(
+      document.getElementById("customDivisor").value
+    );
+  } else {
+    divisor = parseFloat(divisorSelect.value);
+  }
+
+
+  if (!Number.isFinite(divisor) || divisor <= 0) {
+    alert("Please enter a valid volumetric divisor.");
+    return;
+  }
+
+
+  const volumetric = (length * width * height) / divisor;
+  const chargeable = Math.max(actual, volumetric);
+
+
+  document.getElementById("actualResult").textContent =
+    actual.toFixed(2) + " kg";
+
+  document.getElementById("volumetricResult").textContent =
+    volumetric.toFixed(2) + " kg";
+
+  document.getElementById("chargeableResult").textContent =
+    chargeable.toFixed(2) + " kg";
+
+
+  let reason;
+
+  if (volumetric > actual) {
+
+    reason =
+      " The volumetric weight is higher than the actual weight, " +
+      "so " + volumetric.toFixed(2) +
+      " kg is the chargeable weight under the selected divisor assumption.";
+
+  } else if (actual > volumetric) {
+
+    reason =
+      " The actual weight is higher than the volumetric weight, " +
+      "so " + actual.toFixed(2) +
+      " kg is the chargeable weight under this calculation.";
+
+  } else {
+
+    reason =
+      " The actual and volumetric weights are equal.";
+
+  }
+
+
+  document.getElementById("reasonResult").textContent = reason;
+  document.getElementById("result").style.display = "block";
+
+});
+</script>
+
+</body>
+</html>
